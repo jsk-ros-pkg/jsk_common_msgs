@@ -7,3 +7,4 @@ duration duration
 uint32 footstep_group
 geometry_msgs/Vector3 dimensions
 float32 swing_height
+float32 cost
