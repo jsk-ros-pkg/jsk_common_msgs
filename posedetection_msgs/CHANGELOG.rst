@@ -2,6 +2,12 @@
 Changelog for package posedetection_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* move from jsk_common to jsk_common_msgs
+* [posedetection_msgs/package.xml] add message_filters to depends
+* Contributors: Kei Okada
+
 1.0.72 (2015-06-07)
 -------------------
 * [posedetection_msgs] Change local topic name -> global of feature0d_to_image

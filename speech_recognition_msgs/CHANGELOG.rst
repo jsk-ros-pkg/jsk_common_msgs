@@ -2,6 +2,10 @@
 Changelog for package speech_recognition_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* move from jsk_common to jsk_common_msgs
+
 1.0.72 (2015-06-07)
 -------------------
 

@@ -2,6 +2,13 @@
 Changelog for package jsk_footstep_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* move from jsk_common to jsk_common_msgs
+* [jsk_footstep_msgs] Add APPROVED and REJECTED constant to Footstep.msg
+* [jsk_footstep_msgs] Add cost field to Footstep
+* Contributors: Ryohei Ueda
+
 1.0.72 (2015-06-07)
 -------------------
 
