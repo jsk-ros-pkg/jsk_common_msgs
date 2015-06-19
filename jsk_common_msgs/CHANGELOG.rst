@@ -2,8 +2,8 @@
 Changelog for package jsk_common_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+2.0.0 (2015-06-19)
+------------------
 * move from jsk_common to jsk_common_msgs
 * add jsk_common_msgs meta package
 * Contributors: Kei Okada

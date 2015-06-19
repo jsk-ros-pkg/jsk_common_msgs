@@ -2,8 +2,8 @@
 Changelog for package jsk_hark_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+2.0.0 (2015-06-19)
+------------------
 * move from jsk_common to jsk_common_msgs
 
 1.0.72 (2015-06-07)
