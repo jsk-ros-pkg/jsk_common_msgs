@@ -2,6 +2,11 @@
 Changelog for package jsk_footstep_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* [jsk_footstep_msgs] support multi legs in Footstep.msg keeping backwardcompatibility
+* Contributors: Eisoku Kuroiwa
+
 2.0.0 (2015-06-19)
 ------------------
 * move from jsk_common to jsk_common_msgs

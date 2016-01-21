@@ -2,6 +2,12 @@
 Changelog for package posedetection_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* include/posedetection_msgs/feature0d_to_image.h: add cv.hpp
+* CMakeLists.txt : remove posedetection_msgs depends on OpenCV; remove opencv from catkin_package, what provide opencv to catkin_LIBRARIES
+* Contributors: Kei Okada
+
 2.0.0 (2015-06-19)
 ------------------
 * move from jsk_common to jsk_common_msgs
