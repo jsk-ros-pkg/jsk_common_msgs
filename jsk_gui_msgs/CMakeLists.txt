@@ -22,6 +22,7 @@ VoiceMessage.msg
 
 add_service_files(FILES
 Query.srv
+YesNo.srv
 )
 
 generate_messages(
