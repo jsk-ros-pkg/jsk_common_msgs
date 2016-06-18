@@ -2,8 +2,8 @@
 Changelog for package jsk_gui_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+3.0.0 (2016-06-18)
+------------------
 * Add YesNo.srv
 * Contributors: Kentaro Wada
 
