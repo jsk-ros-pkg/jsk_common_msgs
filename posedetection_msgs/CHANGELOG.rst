@@ -2,6 +2,9 @@
 Changelog for package posedetection_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+
 2.0.1 (2016-01-21)
 ------------------
 * include/posedetection_msgs/feature0d_to_image.h: add cv.hpp
