@@ -16,5 +16,6 @@ duration duration
 # optional parameters
 uint32 footstep_group
 geometry_msgs/Vector3 dimensions
+geometry_msgs/Vector3 offset
 float32 swing_height
 float32 cost
