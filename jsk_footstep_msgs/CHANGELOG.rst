@@ -2,6 +2,12 @@
 Changelog for package jsk_footstep_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* [jsk_foostep_msgs] add documentation to Footstep.msg
+* [jsk_foostep_msgs] add offset parameter to Footstep.msg
+* Contributors: Yohei Kakiuchi
+
 3.0.0 (2016-06-18)
 ------------------
 
