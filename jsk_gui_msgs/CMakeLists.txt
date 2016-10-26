@@ -18,6 +18,7 @@ TouchEvent.msg
 DeviceSensor.msg
 Tablet.msg
 VoiceMessage.msg
+SlackMessage.msg
 )
 
 add_service_files(FILES
