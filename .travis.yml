@@ -1,15 +1,20 @@
-language:
-  - cpp
-  - python
+language: generic
 python:
   - "2.7"
 compiler:
   - gcc
 sudo: required
+dist: trusty
+services:
+  - docker
 env:
-  - ROS_DISTRO=hydro  ROSWS=wstool BUILDER=catkin    USE_DEB=true  ROS_PARALLEL_JOBS="-j2 -l2"
-  - ROS_DISTRO=indigo ROSWS=wstool BUILDER=catkin   USE_DEB=true  ROS_PARALLEL_JOBS="-j8"
-  - ROS_DISTRO=jade ROSWS=wstool BUILDER=catkin   USE_DEB=true  ROS_PARALLEL_JOBS="-j8"
+  global:
+    - USE_TRAVIS=true
+  matrix:
+    - ROS_DISTRO=hydro   USE_DEB=true USE_DOCKER=true
+    - ROS_DISTRO=indigo  USE_DEB=true
+    - ROS_DISTRO=jade    USE_DEB=true
+    - ROS_DISTRO=kinetic USE_DEB=true USE_DOCKER=true
 script: source .travis/travis.sh
 notifications:
   email:
