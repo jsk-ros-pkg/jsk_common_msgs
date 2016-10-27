@@ -2,6 +2,11 @@
 Changelog for package jsk_gui_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* [jsk_gui_msgs/msg/SlackMessage.msg] Add msg for posting to slack (`#13 <https://github.com/jsk-ros-pkg/jsk_common_msgs/issues/13>`_ )
+* Contributors: Kentaro Wada
+
 4.0.0 (2016-09-21)
 ------------------
 
