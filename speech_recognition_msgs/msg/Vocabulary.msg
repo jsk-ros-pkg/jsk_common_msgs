@@ -1,0 +1,2 @@
+string[] words
+string[] phonemes

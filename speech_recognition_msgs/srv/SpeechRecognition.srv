@@ -1,0 +1,6 @@
+Vocabulary vocabulary
+float32 duration
+bool quiet
+float32 threshold
+---
+speech_recognition_msgs/SpeechRecognitionCandidates results
