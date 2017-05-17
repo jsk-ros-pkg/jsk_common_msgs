@@ -2,6 +2,9 @@
 Changelog for package jsk_footstep_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+
 4.1.0 (2016-10-27)
 ------------------
 

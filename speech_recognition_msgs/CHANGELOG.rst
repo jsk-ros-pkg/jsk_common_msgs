@@ -2,6 +2,11 @@
 Changelog for package speech_recognition_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* [speech_recognition_msgs] add Vocabulary.msg / SpeechRecognition.srv
+* Contributors: Yuki Furuta
+
 4.1.0 (2016-10-27)
 ------------------
 
