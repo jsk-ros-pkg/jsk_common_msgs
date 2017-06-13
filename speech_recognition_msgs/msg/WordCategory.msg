@@ -1,0 +1,2 @@
+string[] categories
+Vocabulary[] vocabularies
