@@ -1,2 +1,0 @@
-string[] categories
-Vocabulary[] vocabularies
