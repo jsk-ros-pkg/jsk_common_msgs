@@ -8,6 +8,8 @@ find_package(catkin REQUIRED COMPONENTS
 
 add_message_files(
   FILES
+  Grammar.msg
+  PhraseRule.msg
   SpeechRecognitionCandidates.msg
   Vocabulary.msg
 )
