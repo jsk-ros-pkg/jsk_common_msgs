@@ -2,6 +2,14 @@
 Changelog for package speech_recognition_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* [speech_recognition_msgs] add messages for grammar recognition `#17 <https://github.com/jsk-ros-pkg/jsk_common_msgs/pull/17>`_
+  * [speech_recognition_msgs] update srv/SpeechRecognition.srv to support both isolated word, grammar, THIS BREAKS SRV API
+  * [speech_recognition_msgs] remove deprecated mainpage.dox
+  * [speech_recognition_msgs] add grammar messages (msg/Grammar.msg, msg/PhraseRule.msg)
+* Contributors: Yuki Furuta
+
 4.1.1 (2017-05-17)
 ------------------
 * [speech_recognition_msgs] add Vocabulary.msg / SpeechRecognition.srv
