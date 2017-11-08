@@ -11,10 +11,10 @@ env:
   global:
     - USE_TRAVIS=true
   matrix:
-    - ROS_DISTRO=hydro   USE_DEB=true USE_DOCKER=true
     - ROS_DISTRO=indigo  USE_DEB=true
     - ROS_DISTRO=jade    USE_DEB=true
     - ROS_DISTRO=kinetic USE_DEB=true USE_DOCKER=true
+    - ROS_DISTRO=lunar   USE_DEB=true USE_DOCKER=true
 script: source .travis/travis.sh
 notifications:
   email:

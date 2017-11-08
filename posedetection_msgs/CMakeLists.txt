@@ -36,6 +36,7 @@ catkin_package(
     LIBRARIES # TODO
 )
 
+find_package(OpenCV)
 add_executable(feature0d_view src/feature0d_view.cpp)
 target_link_libraries(feature0d_view ${catkin_LIBRARIES} ${OpenCV_LIBRARIES})
 add_dependencies(feature0d_view posedetection_msgs_gencpp)
