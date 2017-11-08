@@ -2,6 +2,11 @@
 Changelog for package posedetection_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* add find_packaeg(OpenCV) for compile error with OpenCV 3.3.1 (`#20 <https://github.com/jsk-ros-pkg/jsk_common_msgs/issues/20>`_)
+* Contributors: Kei Okada
+
 4.3.0 (2017-07-15)
 ------------------
 

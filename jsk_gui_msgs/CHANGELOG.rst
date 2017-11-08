@@ -2,6 +2,9 @@
 Changelog for package jsk_gui_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+
 4.3.0 (2017-07-15)
 ------------------
 * [API BREAK] Add mesage property to YesNo.srv (`#18 <https://github.com/jsk-ros-pkg/jsk_common_msgs/issues/18>`_)
