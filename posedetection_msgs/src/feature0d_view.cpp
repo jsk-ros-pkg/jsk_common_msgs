@@ -32,8 +32,7 @@ namespace posedetection_msgs
         local_nh.param("autosize", autosize, false);
 
         _sub = _node.subscribe("ImageFeature0D",1,&Feature0DView::image_cb,this);
-        cvNamedWindow(_window_name.c_str(), autosize ? CV_WINDOW_AUTOSIZE : 0);
-        cvStartWindowThread();
+        cv::namedWindow(_window_name, autosize ? CV_WINDOW_AUTOSIZE : 0);
     }
     Feature0DView::~Feature0DView() {}
 

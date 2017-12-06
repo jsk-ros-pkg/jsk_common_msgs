@@ -3,9 +3,12 @@ cmake_minimum_required(VERSION 2.8.3)
 project(posedetection_msgs)
 
 find_package(catkin REQUIRED COMPONENTS roscpp std_msgs sensor_msgs geometry_msgs cv_bridge message_generation message_filters)
+find_package(OpenCV REQUIRED)
 
-include_directories(SYSTEM include
-                           ${catkin_INCLUDE_DIRS})
+include_directories(
+  include
+  ${OpenCV_INCLUDE_DIRS}
+  ${catkin_INCLUDE_DIRS})
 
 add_message_files(FILES
   Curve1D.msg
@@ -36,7 +39,6 @@ catkin_package(
     LIBRARIES # TODO
 )
 
-find_package(OpenCV)
 add_executable(feature0d_view src/feature0d_view.cpp)
 target_link_libraries(feature0d_view ${catkin_LIBRARIES} ${OpenCV_LIBRARIES})
 add_dependencies(feature0d_view posedetection_msgs_gencpp)
