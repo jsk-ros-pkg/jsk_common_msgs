@@ -43,6 +43,7 @@
 
 #include <opencv/cv.hpp>
 #include <opencv2/highgui/highgui.hpp>
+#include <opencv2/videoio.hpp>
 #include <boost/shared_ptr.hpp>
 
 #include <message_filters/subscriber.h>
