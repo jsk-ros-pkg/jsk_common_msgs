@@ -41,7 +41,7 @@
 #include <sensor_msgs/Image.h>
 #include <posedetection_msgs/ImageFeature0D.h>
 
-#include <opencv/cv.hpp>
+#include <opencv2/opencv.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <boost/shared_ptr.hpp>
 
