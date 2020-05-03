@@ -2,8 +2,8 @@
 Changelog for package posedetection_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+4.3.2 (2020-05-03)
+------------------
 * fix for noetic, need to use OpenCV2 instead of OpenCV (`#26 <https://github.com/jsk-ros-pkg/jsk_common_msgs/issues/26>`_)
 
   *  add noetic test to travis.yml, update jsk_travis 0.5.10
