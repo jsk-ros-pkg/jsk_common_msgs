@@ -2,7 +2,7 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(posedetection_msgs)
 
-find_package(catkin REQUIRED COMPONENTS roscpp std_msgs sensor_msgs geometry_msgs cv_bridge message_generation message_filters)
+find_package(catkin REQUIRED COMPONENTS roscpp std_msgs sensor_msgs geometry_msgs cv_bridge message_generation message_filters image_transport)
 
 include_directories(SYSTEM include
                            ${catkin_INCLUDE_DIRS})
@@ -30,7 +30,7 @@ generate_messages(
 )
 
 catkin_package(
-    CATKIN_DEPENDS roscpp std_msgs sensor_msgs geometry_msgs message_runtime
+    CATKIN_DEPENDS roscpp std_msgs sensor_msgs geometry_msgs message_runtime image_transport
     DEPENDS
     INCLUDE_DIRS include
     LIBRARIES # TODO

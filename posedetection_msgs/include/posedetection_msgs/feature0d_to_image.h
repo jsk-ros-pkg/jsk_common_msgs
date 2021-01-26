@@ -50,6 +50,9 @@
 #include <message_filters/synchronizer.h>
 #include <message_filters/sync_policies/exact_time.h>
 
+#include <image_transport/image_transport.h>
+#include <image_transport/subscriber_filter.h>
+
 namespace posedetection_msgs
 {
   cv::Mat draw_features(const cv::Mat src,
@@ -84,7 +87,7 @@ namespace posedetection_msgs
     posedetection_msgs::Feature0D
     > SyncPolicy;
     boost::shared_ptr<message_filters::Synchronizer<SyncPolicy> > _sync;
-    message_filters::Subscriber<sensor_msgs::Image> _sub_image;
+    image_transport::SubscriberFilter _sub_image;
     message_filters::Subscriber<posedetection_msgs::Feature0D> _sub_feature;
 
     Feature0DToImage();
