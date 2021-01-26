@@ -27,9 +27,16 @@ namespace posedetection_msgs
     Feature0DToImage::Feature0DToImage()
     {
         ros::NodeHandle local_nh("~");
+        image_transport::TransportHints _hints;
+        image_transport::ImageTransport _image_it(_node);
 
+        // First positional argument is the transport type
+        std::string transport;
+        local_nh.param("image_transport", transport, std::string("raw"));
+        ROS_INFO_STREAM("Using transport \"" << transport << "\" for " << local_nh.getNamespace());
+        _hints = image_transport::TransportHints(transport, ros::TransportHints(), local_nh);
         _pub = _node.advertise<sensor_msgs::Image>(local_nh.resolveName("output"), 1);
-        _sub_image.subscribe(_node, "image", 1);
+        _sub_image.subscribe(_image_it, _node.resolveName("image"), 1, _hints);
         _sub_feature.subscribe(_node, "Feature0D", 1);
         _sync = boost::make_shared<message_filters::Synchronizer<SyncPolicy> >(100);
         _sync->connectInput(_sub_image, _sub_feature);
