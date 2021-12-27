@@ -10,8 +10,10 @@ add_message_files(
   FILES
   Grammar.msg
   PhraseRule.msg
+  SentenceInfo.msg
   SpeechRecognitionCandidates.msg
   Vocabulary.msg
+  WordInfo.msg
 )
 
 add_service_files(
