@@ -1,6 +1,6 @@
 # jsk_common_msgs
 
-[![Build Status](https://travis-ci.org/jsk-ros-pkg/jsk_common_msgs.svg)](https://travis-ci.org/jsk-ros-pkg/jsk_common_msgs)
+[![Build Status](https://app.travis-ci.com/jsk-ros-pkg/jsk_common_msgs.svg?branch=master)](https://app.travis-ci.com/jsk-ros-pkg/jsk_common_msgs)
 
 
 ## Deb Build Status
