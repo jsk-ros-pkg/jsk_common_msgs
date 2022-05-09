@@ -33,7 +33,8 @@ namespace posedetection_msgs
         _sub_feature.subscribe(_node, "Feature0D", 1);
         _sync = boost::make_shared<message_filters::Synchronizer<SyncPolicy> >(100);
         _sync->connectInput(_sub_image, _sub_feature);
-        _sync->registerCallback(boost::bind(&Feature0DToImage::imagefeature_cb, this, _1, _2));
+        _sync->registerCallback(boost::bind(&Feature0DToImage::imagefeature_cb, this,
+            boost::placeholders::_1, boost::placeholders::_2));
         _sub_imagefeature = _node.subscribe("ImageFeature0D", 1, &Feature0DToImage::imagefeature_cb, this);
     }
     Feature0DToImage::~Feature0DToImage() {}
