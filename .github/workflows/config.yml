@@ -29,83 +29,75 @@ jobs:
     steps:
       - name: Install latest git to download .git directory in actions/checkout@v2, git diff requries .git directory ( use sudo for ros-ubuntu )
         run: apt-get update && apt-get install -y software-properties-common && apt-get update && add-apt-repository -y ppa:git-core/ppa && apt-get update && apt-get install -y git
+      - name: work around permission issue  # https://github.com/actions/checkout/issues/760#issuecomment-1097501613
+        run: git config --global --add safe.directory $GITHUB_WORKSPACE
       - name: Chcekout
         uses: actions/checkout@v2
       - name: Check Python3
         run: |
           apt update -q && apt install -y -q python3 git 2to3
-          bash -c "ret=0; trap 'ret=1' ERR; python3 -m compileall .; 2to3 -w -f except -f execfile -f has_key -f raw_input -f zip .; find . -type f -exec grep -Iq . {} \; -a -not -regex '.*/node_scripts/[^/]*py' -exec 2to3 -w -f import {} \; ; git diff --exit-code . :^.travis > /dev/null; echo Exitting with \$ret; exit \$ret"
+          bash -c "ret=0; trap 'ret=1' ERR; python3 -m compileall .; 2to3 -w -f except -f execfile -f has_key -f raw_input -f zip .; find . -type f -exec grep -Iq . {} \; -a -not -regex '.*/node_scripts/[^/]*py' -exec 2to3 -w -f import {} \; ; git diff --exit-code . > /dev/null; echo Exitting with \$ret; exit \$ret"
 
-  indigo:
+  ros:
     runs-on: ubuntu-latest
-    name: indigo
+    strategy:
+      matrix:
+        include:
+          - ROS_DISTRO: indigo
+            CONTAINER: jskrobotics/ros-ubuntu:14.04
+            # latest catkin_virtualenv with pip==21.0.1 is incompatible with python 2.x
+            # https://github.com/jsk-ros-pkg/jsk_3rdparty/pull/237
+            BEFORE_SCRIPT : "sudo pip install virtualenv==15.1.0"
+          - ROS_DISTRO: kinetic
+            CONTAINER: ubuntu:16.04
+          - ROS_DISTRO: melodic
+            CONTAINER: ubuntu:18.04
+          - ROS_DISTRO: noetic
+            CONTAINER: ubuntu:20.04
 
     # use pip installed image due to https://github.com/jsk-ros-pkg/jsk_3rdparty/pull/237 : (Note that pip==21.0.1 is incompatible with python 2.x)
-    container: jskrobotics/ros-ubuntu:14.04
+    container: ${{ matrix.CONTAINER }}
 
     steps:
       - name: Install latest git ( use sudo for ros-ubuntu )
-        run: sudo apt-get update && sudo apt-get install -y software-properties-common && sudo apt-get update && sudo add-apt-repository -y ppa:git-core/ppa && sudo apt-get update && sudo apt-get install -y git
-      - name: Before Checkout # need for actoins/checkout with ros-ubuntu container
-        run: sudo chown -R user:jenkins $RUNNER_WORKSPACE $HOME
+        run: |
+          (apt-get update && apt-get install -y sudo) || echo "OK"
+          sudo apt-get update && sudo apt-get install -y software-properties-common && sudo apt-get update && sudo add-apt-repository -y ppa:git-core/ppa && sudo apt-get update && sudo apt-get install -y git
+      - name: work around permission issue  # https://github.com/actions/checkout/issues/760#issuecomment-1097501613
+        run: |
+          set -x
+          export USER=$(whoami)
+          if [ "${{ matrix.CONTAINER }}" = "jskrobotics/ros-ubuntu:14.04" ]; then
+             git config --global --add safe.directory $GITHUB_WORKSPACE || echo "OK" # Show 'could not lock config file /github/home/.gitconfig: Permission denied', but it is ok
+             sudo mkdir -p /__w/
+             sudo chmod 777 -R /__w/
+             sudo chown -R $USER $HOME
+             # sudo mkdir -p /home/runner/work/_temp/_github_workflow/
+             # sudo chown -R $USER $HOME /home/runner/work/_temp/_github_workflow/
+             # ls -al /home/runner/work/_temp/_github_workflow/
+          else
+             git config --global --add safe.directory $GITHUB_WORKSPACE
+          fi
       - name: Chcekout
         uses: actions/checkout@v2
       - name: Run jsk_travis
         uses: jsk-ros-pkg/jsk_travis@master
         with:
-          ROS_DISTRO : indigo
+          ROS_DISTRO : ${{ matrix.ROS_DISTRO }}
+          BEFORE_SCRIPT : ${{ matrix.BEFORE_SCRIPT }}
           ROS_PARALLEL_TEST_JOBS: "-j8"
-          # latest catkin_virtualenv with pip==21.0.1 is incompatible with python 2.x
-          # https://github.com/jsk-ros-pkg/jsk_3rdparty/pull/237
-          BEFORE_SCRIPT : "sudo pip install virtualenv==15.1.0"
 
-  kinetic:
+  debian-unstable:
     runs-on: ubuntu-latest
-    name: kinetic
-
-    container: ubuntu:16.04
+    container: debian:unstable
 
     steps:
-      - name: Install latest git ( use sudo for ros-ubuntu )
-        run: apt-get update && apt-get install -y software-properties-common && apt-get update && add-apt-repository -y ppa:git-core/ppa && apt-get update && apt-get install -y git
       - name: Chcekout
         uses: actions/checkout@v2
-      - name: Run jsk_travis
-        uses: jsk-ros-pkg/jsk_travis@master
-        with:
-          ROS_DISTRO : kinetic
-          ROS_PARALLEL_TEST_JOBS: "-j8"
 
-  melodic:
-    runs-on: ubuntu-latest
-    name: melodic
-
-    container: ubuntu:18.04
-
-    steps:
-      - name: Install latest git ( use sudo for ros-ubuntu )
-        run: apt-get update && apt-get install -y software-properties-common && apt-get update && add-apt-repository -y ppa:git-core/ppa && apt-get update && apt-get install -y git
-      - name: Chcekout
-        uses: actions/checkout@v2
-      - name: Run jsk_travis
-        uses: jsk-ros-pkg/jsk_travis@master
-        with:
-          ROS_DISTRO : melodic
-          ROS_PARALLEL_TEST_JOBS: "-j8"
-
-  noetic:
-    runs-on: ubuntu-latest
-    name: noetic
-
-    container: ubuntu:20.04
-
-    steps:
-      - name: Install latest git ( use sudo for ros-ubuntu )
-        run: apt-get update && apt-get install -y software-properties-common && apt-get update && add-apt-repository -y ppa:git-core/ppa && apt-get update && apt-get install -y git
-      - name: Chcekout
-        uses: actions/checkout@v2
-      - name: Run jsk_travis
-        uses: jsk-ros-pkg/jsk_travis@master
-        with:
-          ROS_DISTRO : noetic
-          ROS_PARALLEL_TEST_JOBS: "-j8"
+      - name: Test Debian Latest
+        run: |
+          grep ^deb /etc/apt/sources.list  | sed 's/deb http/deb-src http/' >> /etc/apt/sources.list
+          apt update
+          apt install -y debhelper-compat catkin libroscpp-core-dev ros-message-generation libstd-msgs-dev python3-all python3-setuptools dh-sequence-python3 ros-std-msgs ros-sensor-msgs ros-actionlib-msgs ros-geometry-msgs libstd-msgs-dev libsensor-msgs-dev libactionlib-msgs-dev libgeometry-msgs-dev libcv-bridge-dev libmessage-filters-dev
+          export EXIT_STATUS=0; for pkg in *_msgs; do ( mkdir -p $pkg/build; cd $pkg/build; cmake ..; make VERBOSE=1 ) || export EXIT_STATUS=$?; done; exit $EXIT_STATUS;
