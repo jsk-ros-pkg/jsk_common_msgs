@@ -43,17 +43,17 @@
 
 namespace posedetection_msgs
 {
-  class Feature0DView : public rclcpp::Node
-  {
-  public:
-    rclcpp::Subscription<posedetection_msgs::msg::ImageFeature0D>::SharedPtr _sub;
-    std::string _window_name;
-    cv_bridge::CvImage _bridge;
+class Feature0DView : public rclcpp::Node
+{
+public:
+  rclcpp::Subscription<posedetection_msgs::msg::ImageFeature0D>::SharedPtr _sub;
+  std::string _window_name;
+  cv_bridge::CvImage _bridge;
 
-    explicit Feature0DView(const rclcpp::NodeOptions & options);
-    void image_cb(
-      const posedetection_msgs::msg::ImageFeature0D::ConstSharedPtr msg_ptr);
-  };
+  explicit Feature0DView(const rclcpp::NodeOptions & options);
+  void image_cb(
+    const posedetection_msgs::msg::ImageFeature0D::ConstSharedPtr msg_ptr);
+};
 }
 
 #endif
