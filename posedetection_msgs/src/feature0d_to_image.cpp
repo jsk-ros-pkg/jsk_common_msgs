@@ -12,35 +12,34 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 #include "posedetection_msgs/feature0d_to_image.h"
-#include <ros/node_handle.h>
-#include <sensor_msgs/Image.h>
-#include <posedetection_msgs/ImageFeature0D.h>
+#include <rclcpp/rclcpp.hpp>
+#include <sensor_msgs/msg/image.hpp>
+#include <posedetection_msgs/msg/image_feature0_d.hpp>
 
 #include <opencv2/highgui/highgui.hpp>
-#include <boost/shared_ptr.hpp>
 
 #include <cv_bridge/cv_bridge.h>
 #include <message_filters/synchronizer.h>
 
 namespace posedetection_msgs
 {
-    Feature0DToImage::Feature0DToImage()
+    Feature0DToImage::Feature0DToImage(const rclcpp::NodeOptions & options)
+    : Node("feature0d_to_image", options)
     {
-        ros::NodeHandle local_nh("~");
-
-        _pub = _node.advertise<sensor_msgs::Image>(local_nh.resolveName("output"), 1);
-        _sub_image.subscribe(_node, "image", 1);
-        _sub_feature.subscribe(_node, "Feature0D", 1);
-        _sync = boost::make_shared<message_filters::Synchronizer<SyncPolicy> >(100);
+        using std::placeholders::_1;
+        using std::placeholders::_2;
+        _pub = create_publisher<sensor_msgs::msg::Image>("~/output", 1);
+        _sub_image.subscribe(this, "~/image", rclcpp::QoS(1).get_rmw_qos_profile());
+        _sub_feature.subscribe(this, "~/Feature0D", rclcpp::QoS(1).get_rmw_qos_profile());
+        _sync = std::make_shared<message_filters::Synchronizer<SyncPolicy> >(100);
         _sync->connectInput(_sub_image, _sub_feature);
-        _sync->registerCallback(boost::bind(&Feature0DToImage::imagefeature_cb, this,
-            boost::placeholders::_1, boost::placeholders::_2));
-        _sub_imagefeature = _node.subscribe("ImageFeature0D", 1, &Feature0DToImage::imagefeature_cb, this);
+        _sync->registerCallback(std::bind(&Feature0DToImage::image_with_feature_cb, this, _1, _2));
+        _sub_imagefeature = create_subscription<posedetection_msgs::msg::ImageFeature0D>(
+            "~/ImageFeature0D", 1, std::bind(&Feature0DToImage::imagefeature_cb, this, _1));
     }
-    Feature0DToImage::~Feature0DToImage() {}
 
-    void Feature0DToImage::imagefeature_cb(const sensor_msgs::ImageConstPtr& image_msg,
-                                           const posedetection_msgs::Feature0DConstPtr& feature_msg)
+    void Feature0DToImage::image_with_feature_cb(const sensor_msgs::msg::Image::ConstSharedPtr& image_msg,
+                                           const posedetection_msgs::msg::Feature0D::ConstSharedPtr& feature_msg)
     {
         cv_bridge::CvImagePtr cv_ptr;
         try {
@@ -49,14 +48,14 @@ namespace posedetection_msgs
                                           feature_msg->positions,
                                           feature_msg->scales,
                                           feature_msg->orientations);
-            _pub.publish(cv_bridge::CvImage(cv_ptr->header, "bgr8", image));
+            _pub->publish(*cv_bridge::CvImage(cv_ptr->header, "bgr8", image).toImageMsg());
         } catch (cv_bridge::Exception& error) {
-            ROS_WARN("bad frame");
+            RCLCPP_WARN(get_logger(), "bad frame");
             return;
         }
     }
 
-    void Feature0DToImage::imagefeature_cb(const posedetection_msgs::ImageFeature0DConstPtr& msg_ptr)
+    void Feature0DToImage::imagefeature_cb(const posedetection_msgs::msg::ImageFeature0D::ConstSharedPtr msg_ptr)
     {
         cv_bridge::CvImagePtr cv_ptr;
         try {
@@ -65,19 +64,13 @@ namespace posedetection_msgs
                                           msg_ptr->features.positions,
                                           msg_ptr->features.scales,
                                           msg_ptr->features.orientations);
-            _pub.publish(cv_bridge::CvImage(cv_ptr->header, "bgr8", image));
+            _pub->publish(*cv_bridge::CvImage(cv_ptr->header, "bgr8", image).toImageMsg());
         } catch (cv_bridge::Exception& error) {
-            ROS_WARN("bad frame");
+            RCLCPP_WARN(get_logger(), "bad frame");
             return;
         }
     }
 }
 
-int main(int argc, char **argv)
-{
-    ros::init(argc, argv, "feature0d_to_image");
-    boost::shared_ptr<posedetection_msgs::Feature0DToImage> node(new posedetection_msgs::Feature0DToImage());
-    ros::spin();
-    return 0;
-}
-
+#include <rclcpp_components/register_node_macro.hpp>
+RCLCPP_COMPONENTS_REGISTER_NODE(posedetection_msgs::Feature0DToImage)

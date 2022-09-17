@@ -37,39 +37,18 @@
 #ifndef POSEDETECTION_MSGS_FEATURE0D_TO_IMAGE_H_
 #define POSEDETECTION_MSGS_FEATURE0D_TO_IMAGE_H_
 
-#include <ros/node_handle.h>
-#include <sensor_msgs/Image.h>
-#include <posedetection_msgs/ImageFeature0D.h>
+#include <rclcpp/rclcpp.hpp>
+#include <sensor_msgs/msg/image.hpp>
+#include <posedetection_msgs/msg/image_feature0_d.hpp>
 
 #include <opencv2/opencv.hpp>
 #include <opencv2/highgui/highgui.hpp>
-#include <boost/shared_ptr.hpp>
+// #include <boost/shared_ptr.hpp>
 
 #include <message_filters/subscriber.h>
 #include <message_filters/time_synchronizer.h>
 #include <message_filters/synchronizer.h>
 #include <message_filters/sync_policies/exact_time.h>
-
-#if BOOST_VERSION < 106000  // since 1.60.0, boost uses placeholders namesapce for _1,_2...
-#ifndef BOOST_PLAEHOLDERS
-#define BOOST_PLAEHOLDERS
-namespace boost
-{
-namespace placeholders
-{
-extern boost::arg<1> _1;
-extern boost::arg<2> _2;
-extern boost::arg<3> _3;
-extern boost::arg<4> _4;
-extern boost::arg<5> _5;
-extern boost::arg<6> _6;
-extern boost::arg<7> _7;
-extern boost::arg<8> _8;
-extern boost::arg<9> _9;
-}  // namespace placeholders
-}  // namespace boost
-#endif  // BOOST_PLAEHOLDERS
-#endif  // BOOST_VERSION < 106000
 
 namespace posedetection_msgs
 {
@@ -94,25 +73,23 @@ namespace posedetection_msgs
     return dst;
   }
 
-  class Feature0DToImage
+  class Feature0DToImage : public rclcpp::Node
   {
   public:
-    ros::NodeHandle _node;
-    ros::Publisher _pub;
-    ros::Subscriber _sub_imagefeature;
+    rclcpp::Publisher<sensor_msgs::msg::Image>::SharedPtr _pub;
+    rclcpp::Subscription<posedetection_msgs::msg::ImageFeature0D>::SharedPtr _sub_imagefeature;
     typedef message_filters::sync_policies::ExactTime<
-    sensor_msgs::Image,
-    posedetection_msgs::Feature0D
+    sensor_msgs::msg::Image,
+    posedetection_msgs::msg::Feature0D
     > SyncPolicy;
-    boost::shared_ptr<message_filters::Synchronizer<SyncPolicy> > _sync;
-    message_filters::Subscriber<sensor_msgs::Image> _sub_image;
-    message_filters::Subscriber<posedetection_msgs::Feature0D> _sub_feature;
+    std::shared_ptr<message_filters::Synchronizer<SyncPolicy> > _sync;
+    message_filters::Subscriber<sensor_msgs::msg::Image> _sub_image;
+    message_filters::Subscriber<posedetection_msgs::msg::Feature0D> _sub_feature;
 
-    Feature0DToImage();
-    virtual ~Feature0DToImage();
-    void imagefeature_cb(const posedetection_msgs::ImageFeature0DConstPtr& msg_ptr);
-    void imagefeature_cb(const sensor_msgs::ImageConstPtr& image_msg,
-                         const posedetection_msgs::Feature0DConstPtr& feature_msg);
+    explicit Feature0DToImage(const rclcpp::NodeOptions & options);
+    void imagefeature_cb(const posedetection_msgs::msg::ImageFeature0D::ConstSharedPtr msg_ptr);
+    void image_with_feature_cb(const sensor_msgs::msg::Image::ConstSharedPtr& image_msg,
+                         const posedetection_msgs::msg::Feature0D::ConstSharedPtr& feature_msg);
   };
 }
 

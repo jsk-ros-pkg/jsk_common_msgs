@@ -37,23 +37,22 @@
 #ifndef POSEDETECTION_MSGS_FEATURE0D_VIEW_H_
 #define POSEDETECTION_MSGS_FEATURE0D_VIEW_H_
 
-#include <ros/node_handle.h>
-#include <posedetection_msgs/ImageFeature0D.h>
+#include <rclcpp/rclcpp.hpp>
+#include <posedetection_msgs/msg/image_feature0_d.hpp>
 #include <cv_bridge/cv_bridge.h>
 
 namespace posedetection_msgs
 {
-  class Feature0DView
+  class Feature0DView : public rclcpp::Node
   {
   public:
-    ros::NodeHandle _node;
-    ros::Subscriber _sub;
+    rclcpp::Subscription<posedetection_msgs::msg::ImageFeature0D>::SharedPtr _sub;
     std::string _window_name;
     cv_bridge::CvImage _bridge;
 
-    Feature0DView();
-    virtual ~Feature0DView();
-    void image_cb(const posedetection_msgs::ImageFeature0DConstPtr& msg_ptr);
+    explicit Feature0DView(const rclcpp::NodeOptions & options);
+    void image_cb(
+      const posedetection_msgs::msg::ImageFeature0D::ConstSharedPtr msg_ptr);
   };
 }
 
