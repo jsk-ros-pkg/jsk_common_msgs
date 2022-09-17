@@ -42,44 +42,48 @@ rosidl_get_typesupport_target(cpp_typesupport_target "${PROJECT_NAME}" "rosidl_t
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
+  list(APPEND AMENT_LINT_AUTO_EXCLUDE
+    ament_cmake_copyright
+  )
   ament_lint_auto_find_test_dependencies()
 endif()
 
 if(cpp_typesupport_target)
   find_package(OpenCV REQUIRED)
-  add_library(feature0d_view_node SHARED
+  add_library(feature0d_view SHARED
     src/feature0d_view.cpp
   )
 
-  target_include_directories(feature0d_view_node PUBLIC
+  target_include_directories(feature0d_view PUBLIC
     "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
     "$<INSTALL_INTERFACE:include/${PROJECT_NAME}>"
   )
 
-  target_link_libraries(feature0d_view_node
+  target_link_libraries(feature0d_view
     cv_bridge::cv_bridge
     opencv_core
+    opencv_highgui
     rclcpp::rclcpp
     rclcpp_components::component
     message_filters::message_filters
     "${cpp_typesupport_target}"
   )
 
-  rclcpp_components_register_node(feature0d_view_node
+  rclcpp_components_register_node(feature0d_view
     PLUGIN "posedetection_msgs::Feature0DView"
-    EXECUTABLE feature0d_view
+    EXECUTABLE feature0d_view_exe
   )
 
-  add_library(feature0d_to_image_node SHARED
+  add_library(feature0d_to_image SHARED
     src/feature0d_to_image.cpp
   )
 
-  target_include_directories(feature0d_to_image_node PUBLIC
+  target_include_directories(feature0d_to_image PUBLIC
     "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
     "$<INSTALL_INTERFACE:include/${PROJECT_NAME}>"
   )
 
-  target_link_libraries(feature0d_to_image_node
+  target_link_libraries(feature0d_to_image
     cv_bridge::cv_bridge
     opencv_core
     rclcpp::rclcpp
@@ -88,9 +92,25 @@ if(cpp_typesupport_target)
     "${cpp_typesupport_target}"
   )
 
-  rclcpp_components_register_node(feature0d_to_image_node
+  rclcpp_components_register_node(feature0d_to_image
     PLUGIN "posedetection_msgs::Feature0DToImage"
-    EXECUTABLE feature0d_to_image
+    EXECUTABLE feature0d_to_image_exe
+  )
+
+  install(
+    TARGETS feature0d_view
+    EXPORT export_feature0d_view
+    ARCHIVE DESTINATION lib
+    LIBRARY DESTINATION lib
+    RUNTIME DESTINATION bin
+  )
+
+  install(
+    TARGETS feature0d_to_image
+    EXPORT export_feature0d_to_image
+    ARCHIVE DESTINATION lib
+    LIBRARY DESTINATION lib
+    RUNTIME DESTINATION bin
   )
 endif()
 
