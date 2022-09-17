@@ -11,8 +11,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "posedetection_msgs/feature0d_to_image.h"
-#include "posedetection_msgs/feature0d_view.h"
+#include "posedetection_msgs/feature0d_to_image.hpp"
+#include "posedetection_msgs/feature0d_view.hpp"
 #include <rclcpp/rclcpp.hpp>
 #include <posedetection_msgs/msg/image_feature0_d.hpp>
 
