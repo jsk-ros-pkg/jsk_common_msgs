@@ -1,7 +1,7 @@
 # goal
 FootstepArray goal_footstep
 FootstepArray initial_footstep
-duration timeout
+builtin_interfaces/Duration timeout
 ---
 # result
 FootstepArray result

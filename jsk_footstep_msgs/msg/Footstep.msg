@@ -13,7 +13,7 @@ uint8 RARM=6
 
 uint8 leg ## value should be one of limb_indicator values.
 geometry_msgs/Pose pose ## 'pose' represents nominal pose. It may be an end-effector of limb.
-duration duration
+builtin_interfaces/Duration duration
 # optional parameters
 uint32 footstep_group
 geometry_msgs/Vector3 dimensions ## cube [length(x), width(y), height(z)]
