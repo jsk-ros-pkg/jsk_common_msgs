@@ -11,6 +11,7 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 #include "posedetection_msgs/feature0d_to_image.hpp"
 #include <rclcpp/rclcpp.hpp>
 #include <sensor_msgs/msg/image.hpp>
@@ -74,7 +75,7 @@ void Feature0DToImage::imagefeature_cb(
     return;
   }
 }
-}
+}  // namespace posedetection_msgs
 
 #include <rclcpp_components/register_node_macro.hpp>
 RCLCPP_COMPONENTS_REGISTER_NODE(posedetection_msgs::Feature0DToImage)

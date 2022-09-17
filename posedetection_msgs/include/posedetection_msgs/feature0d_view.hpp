@@ -34,12 +34,14 @@
  *********************************************************************/
 
 
-#ifndef POSEDETECTION_MSGS_FEATURE0D_VIEW_H_
-#define POSEDETECTION_MSGS_FEATURE0D_VIEW_H_
+#ifndef POSEDETECTION_MSGS__FEATURE0D_VIEW_HPP_
+#define POSEDETECTION_MSGS__FEATURE0D_VIEW_HPP_
 
-#include <rclcpp/rclcpp.hpp>
-#include <posedetection_msgs/msg/image_feature0_d.hpp>
 #include <cv_bridge/cv_bridge.h>
+#include <posedetection_msgs/msg/image_feature0_d.hpp>
+#include <rclcpp/rclcpp.hpp>
+
+#include <string>
 
 namespace posedetection_msgs
 {
@@ -54,6 +56,6 @@ public:
   void image_cb(
     const posedetection_msgs::msg::ImageFeature0D::ConstSharedPtr msg_ptr);
 };
-}
+}  // namespace posedetection_msgs
 
-#endif
+#endif  // POSEDETECTION_MSGS__FEATURE0D_VIEW_HPP_

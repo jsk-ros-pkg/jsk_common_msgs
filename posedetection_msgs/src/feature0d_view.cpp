@@ -52,7 +52,7 @@ void Feature0DView::image_cb(
     return;
   }
 }
-}
+}  // namespace posedetection_msgs
 
 #include <rclcpp_components/register_node_macro.hpp>
 RCLCPP_COMPONENTS_REGISTER_NODE(posedetection_msgs::Feature0DView)

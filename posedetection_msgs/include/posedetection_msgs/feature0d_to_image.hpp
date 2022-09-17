@@ -34,8 +34,8 @@
  *********************************************************************/
 
 
-#ifndef POSEDETECTION_MSGS_FEATURE0D_TO_IMAGE_H_
-#define POSEDETECTION_MSGS_FEATURE0D_TO_IMAGE_H_
+#ifndef POSEDETECTION_MSGS__FEATURE0D_TO_IMAGE_HPP_
+#define POSEDETECTION_MSGS__FEATURE0D_TO_IMAGE_HPP_
 
 #include <rclcpp/rclcpp.hpp>
 #include <sensor_msgs/msg/image.hpp>
@@ -43,12 +43,14 @@
 
 #include <opencv2/opencv.hpp>
 #include <opencv2/highgui/highgui.hpp>
-// #include <boost/shared_ptr.hpp>
 
 #include <message_filters/subscriber.h>
 #include <message_filters/time_synchronizer.h>
 #include <message_filters/synchronizer.h>
 #include <message_filters/sync_policies/exact_time.h>
+
+#include <memory>
+#include <vector>
 
 namespace posedetection_msgs
 {
@@ -94,6 +96,6 @@ public:
     const sensor_msgs::msg::Image::ConstSharedPtr & image_msg,
     const posedetection_msgs::msg::Feature0D::ConstSharedPtr & feature_msg);
 };
-}
+}  // namespace posedetection_msgs
 
-#endif
+#endif  // POSEDETECTION_MSGS__FEATURE0D_TO_IMAGE_HPP_
