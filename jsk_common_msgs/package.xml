@@ -8,12 +8,13 @@
   </description>
 
   <maintainer email="k-okada@jsk.t.u-tokyo.ac.jp">Kei Okada</maintainer>
-  <author email="k-okada@jsk.t.u-tokyo.ac.jp">Kei Okada</author>
 
   <license>BSD</license>
   <url type="website">http://ros.org/wiki/jsk_common_msgs</url>
   <url type="repository">https://github.com/jsk-ros-pkg/jsk_common_msgs</url>
   <url type="bugtracker">https://github.com/jsk-ros-pkg/jsk_common_msgs/issues</url>
+
+  <author email="k-okada@jsk.t.u-tokyo.ac.jp">Kei Okada</author>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
 

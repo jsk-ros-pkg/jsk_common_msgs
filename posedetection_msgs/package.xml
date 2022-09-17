@@ -5,6 +5,7 @@
   <version>4.3.2</version>
   <description>posedetection_msgs provides messages and services to facilitate passing pose detection results and features.</description>
   <!-- <maintainer>Rosen Diankov</maintainer> -->
+  <maintainer email="k-okada@jsk.t.u-tokyo.ac.jp">Kei Okada</maintainer>
 
   <license>BSD</license>
 
@@ -12,7 +13,6 @@
   <!-- <url type="bugtracker"></url> -->
 
   <author>Rosen Diankov</author>
-  <maintainer email="k-okada@jsk.t.u-tokyo.ac.jp">Kei Okada</maintainer>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
 
