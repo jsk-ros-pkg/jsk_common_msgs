@@ -5,6 +5,9 @@ on:
       - master
   pull_request:
 
+env:
+  ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: 'true'
+
 jobs:
   check_python2:
     runs-on: ubuntu-latest
@@ -14,7 +17,7 @@ jobs:
 
     steps:
       - name: Chcekout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: Check Python2
         run: |
           apt update -q && apt install -y -q python2
@@ -32,7 +35,7 @@ jobs:
       - name: work around permission issue  # https://github.com/actions/checkout/issues/760#issuecomment-1097501613
         run: git config --global --add safe.directory $GITHUB_WORKSPACE
       - name: Chcekout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: Check Python3
         run: |
           apt update -q && apt install -y -q python3 git 2to3
@@ -79,7 +82,7 @@ jobs:
              git config --global --add safe.directory $GITHUB_WORKSPACE
           fi
       - name: Chcekout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: Run jsk_travis
         uses: jsk-ros-pkg/jsk_travis@master
         with:
@@ -93,7 +96,7 @@ jobs:
 
     steps:
       - name: Chcekout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Test Debian Latest
         run: |
