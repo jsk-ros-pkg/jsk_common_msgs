@@ -1,4 +1,4 @@
-Header header
+std_msgs/Header header
 float32[] positions # 2*N, 0-indexed
 float32[] scales # N, optional
 float32[] orientations # N, optional, along +X is 0
