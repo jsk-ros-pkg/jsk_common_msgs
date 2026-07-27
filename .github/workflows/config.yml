@@ -112,7 +112,7 @@ jobs:
           grep ^deb /etc/apt/sources.list  | sed 's/deb http/deb-src http/' >> /etc/apt/sources.list
           apt update
           apt install -y debhelper-compat catkin libroscpp-core-dev ros-message-generation libstd-msgs-dev python3-all python3-setuptools dh-sequence-python3 ros-std-msgs ros-sensor-msgs ros-actionlib-msgs ros-geometry-msgs libstd-msgs-dev libsensor-msgs-dev libactionlib-msgs-dev libgeometry-msgs-dev libcv-bridge-dev libmessage-filters-dev
-          export EXIT_STATUS=0; for pkg in *_msgs; do ( mkdir -p $pkg/build; cd $pkg/build; cmake ..; make VERBOSE=1 ) || export EXIT_STATUS=$?; done; exit $EXIT_STATUS;
+          export EXIT_STATUS=0; for pkg in *_msgs; do ( mkdir -p $pkg/build; cd $pkg/build; cmake -DCMAKE_POLICY_VERSION_MINIMUM=3.5 ..; make VERBOSE=1 ) || export EXIT_STATUS=$?; done; exit $EXIT_STATUS;
 
   # ROS-O setup https://github.com/v4hn/ros-o-builder/blob/jammy-one/README.md#install-instructions
   ros-o:
