@@ -1,7 +1,7 @@
 # goal
 FootstepArray goal_footstep
 FootstepArray initial_footstep
-duration timeout
+@DURATION_TYPE@ timeout
 ---
 # result
 FootstepArray result

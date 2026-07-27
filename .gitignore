@@ -1,0 +1,2 @@
+jsk_footstep_msgs/action/PlanFootsteps.action
+jsk_footstep_msgs/msg/Footstep.msg
