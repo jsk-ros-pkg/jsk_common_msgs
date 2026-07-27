@@ -29,14 +29,6 @@ set(_deps
 )
 
 if("$ENV{ROS_VERSION}" EQUAL 1)
-  set(_runtime_dest ${CATKIN_PACKAGE_BIN_DESTINATION})
-  set(_lib_dest ${CATKIN_PACKAGE_LIB_DESTINATION})
-elseif("$ENV{ROS_VERSION}" EQUAL 2)
-  set(_runtime_dest lib/${PROJECT_NAME})
-  set(_lib_dest lib)
-endif()
-
-if("$ENV{ROS_VERSION}" EQUAL 1)
 find_package(catkin REQUIRED COMPONENTS roscpp ${_deps} cv_bridge message_generation message_filters)
 
 include_directories(SYSTEM include
@@ -131,6 +123,16 @@ elseif("$ENV{ROS_VERSION}" EQUAL 2)
 endif()
 
 if(TARGET feature0d_view)
+  # CATKIN_PACKAGE_*_DESTINATION are only defined once catkin_package()
+  # (called above, in the ROS1 branch) has run.
+  if("$ENV{ROS_VERSION}" EQUAL 1)
+    set(_runtime_dest ${CATKIN_PACKAGE_BIN_DESTINATION})
+    set(_lib_dest ${CATKIN_PACKAGE_LIB_DESTINATION})
+  elseif("$ENV{ROS_VERSION}" EQUAL 2)
+    set(_runtime_dest lib/${PROJECT_NAME})
+    set(_lib_dest lib)
+  endif()
+
   install(TARGETS feature0d_view feature0d_to_image
     RUNTIME DESTINATION ${_runtime_dest}
     ARCHIVE DESTINATION ${_lib_dest}
