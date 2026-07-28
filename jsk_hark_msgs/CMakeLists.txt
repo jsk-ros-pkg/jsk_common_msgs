@@ -1,5 +1,11 @@
 # http://ros.org/doc/groovy/api/catkin/html/user_guide/supposed.html
 # lint_cmake: -whitespace/indent
+# Fall back to ROS1 when $ROS_VERSION is unset (pre-ros_environment distros,
+# e.g. indigo); every ROS2 environment always sets it via ros_environment.
+if("$ENV{ROS_VERSION}" STREQUAL "")
+  set(ENV{ROS_VERSION} 1)
+endif()
+
 if("$ENV{ROS_VERSION}" EQUAL 1)
   cmake_minimum_required(VERSION 2.8.12)
 elseif("$ENV{ROS_VERSION}" EQUAL 2)
