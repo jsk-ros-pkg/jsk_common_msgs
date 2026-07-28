@@ -2,6 +2,11 @@
 Changelog for package jsk_footstep_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Make actionlib_msgs a ROS1-only dependency; ROS2 actions don't need it
+* Contributors: Kei Okada
+
 5.0.0 (2026-07-28)
 ------------------
 * Add ROS2 (ament_cmake) support alongside ROS1 (catkin), building from the
