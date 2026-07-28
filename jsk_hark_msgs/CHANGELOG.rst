@@ -2,6 +2,15 @@
 Changelog for package jsk_hark_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Add ROS2 (ament_cmake) support alongside ROS1 (catkin), building from the
+  same source tree (`#35 <https://github.com/jsk-ros-pkg/jsk_common_msgs/issues/35>`_). HarkPower.msg now uses the fully-qualified
+  std_msgs/Header, required by ROS2 rosidl
+* Simplify the ROS2 CMake using rosidl_auto_generate_interfaces()
+* Quiet ament lint warnings triggered by pre-existing CMake style
+* Contributors: Daisuke Nishimatsu, Kei Okada
+
 4.3.2 (2020-05-03)
 ------------------
 

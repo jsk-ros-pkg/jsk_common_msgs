@@ -2,6 +2,20 @@
 Changelog for package posedetection_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Add ROS2 (ament_cmake) support alongside ROS1 (catkin) for feature0d_view
+  and feature0d_to_image and for message/service generation, building from
+  the same source tree (`#35 <https://github.com/jsk-ros-pkg/jsk_common_msgs/issues/35>`_). Three msg files now use the
+  fully-qualified std_msgs/Header, required by ROS2 rosidl
+* Simplify the ROS2 CMake using rosidl_auto_generate_interfaces()
+* Guard __has_include usage for compilers that don't support it (e.g. GCC 4.8
+  on indigo)
+* Quiet ament lint warnings triggered by pre-existing code/CMake style
+* Use boost::placeholders::_1/_2 instead of the deprecated global-namespace
+  _1/_2, with a compatibility shim for pre-1.60 Boost (`#32 <https://github.com/jsk-ros-pkg/jsk_common_msgs/issues/32>`_)
+* Contributors: Daisuke Nishimatsu, Kei Okada, Lucas Walter
+
 4.3.2 (2020-05-03)
 ------------------
 * fix for noetic, need to use OpenCV2 instead of OpenCV (`#26 <https://github.com/jsk-ros-pkg/jsk_common_msgs/issues/26>`_)

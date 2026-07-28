@@ -2,6 +2,12 @@
 Changelog for package jsk_common_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Add ROS2 (ament_cmake) support alongside ROS1 (catkin), building the same
+  metapackage manifest from a single source tree (`#35 <https://github.com/jsk-ros-pkg/jsk_common_msgs/issues/35>`_)
+* Contributors: Daisuke Nishimatsu, Kei Okada
+
 4.3.2 (2020-05-03)
 ------------------
 
