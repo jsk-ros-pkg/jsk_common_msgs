@@ -86,7 +86,10 @@ elseif("$ENV{ROS_VERSION}" EQUAL 2)
   find_package(builtin_interfaces REQUIRED)
   find_package(ros_environment REQUIRED)
   foreach(_dep ${_deps})
-    find_package(${_dep} REQUIRED)
+    # actionlib_msgs is ROS1-only; ROS2 actions compile natively via rosidl
+    if(NOT _dep STREQUAL "actionlib_msgs")
+      find_package(${_dep} REQUIRED)
+    endif()
   endforeach()
 
   rosidl_auto_generate_interfaces(ADD_LINTER_TESTS)
