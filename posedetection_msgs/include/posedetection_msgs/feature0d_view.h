@@ -37,23 +37,59 @@
 #ifndef POSEDETECTION_MSGS_FEATURE0D_VIEW_H_
 #define POSEDETECTION_MSGS_FEATURE0D_VIEW_H_
 
-#include <ros/node_handle.h>
+// roscpp is only on the include path in a ROS1 (catkin) build; ROS2
+// (ament_cmake) builds this package against rclcpp instead. If it's
+// there, pull it in and let its own ROS_VERSION_MAJOR (from
+// ros/common.h) tell ROS1 and ROS2 apart; if it's not there,
+// ROS_VERSION_MAJOR stays undefined and reads as 0 below. __has_include
+// itself isn't recognized by old compilers (e.g. GCC 4.8 on indigo), so
+// fall back to assuming ROS1 there rather than letting the #if fail to
+// parse -- only ROS1 distros predating __has_include support exist.
+#if defined(__has_include)
+#if __has_include(<ros/ros.h>)
+#include <ros/ros.h>
+#endif
+#else
+#include <ros/ros.h>
+#endif
+
+#if ROS_VERSION_MAJOR == 1
 #include <posedetection_msgs/ImageFeature0D.h>
 #include <cv_bridge/cv_bridge.h>
+#else
+#include <rclcpp/rclcpp.hpp>
+#include <posedetection_msgs/msg/image_feature0_d.hpp>
+#include <cv_bridge/cv_bridge.hpp>
+
+#include <string>
+#endif
 
 namespace posedetection_msgs
 {
   class Feature0DView
   {
   public:
+#if ROS_VERSION_MAJOR == 1
     ros::NodeHandle _node;
     ros::Subscriber _sub;
+#else
+    rclcpp::Node::SharedPtr _node;
+    rclcpp::Subscription<posedetection_msgs::msg::ImageFeature0D>::SharedPtr _sub;
+#endif
     std::string _window_name;
     cv_bridge::CvImage _bridge;
 
+#if ROS_VERSION_MAJOR == 1
     Feature0DView();
+#else
+    explicit Feature0DView(rclcpp::Node::SharedPtr node);
+#endif
     virtual ~Feature0DView();
+#if ROS_VERSION_MAJOR == 1
     void image_cb(const posedetection_msgs::ImageFeature0DConstPtr& msg_ptr);
+#else
+    void image_cb(const posedetection_msgs::msg::ImageFeature0D::ConstSharedPtr msg_ptr);
+#endif
   };
 }
 
