@@ -41,8 +41,15 @@
 // (ament_cmake) builds this package against rclcpp instead. If it's
 // there, pull it in and let its own ROS_VERSION_MAJOR (from
 // ros/common.h) tell ROS1 and ROS2 apart; if it's not there,
-// ROS_VERSION_MAJOR stays undefined and reads as 0 below.
+// ROS_VERSION_MAJOR stays undefined and reads as 0 below. __has_include
+// itself isn't recognized by old compilers (e.g. GCC 4.8 on indigo), so
+// fall back to assuming ROS1 there rather than letting the #if fail to
+// parse -- only ROS1 distros predating __has_include support exist.
+#if defined(__has_include)
 #if __has_include(<ros/ros.h>)
+#include <ros/ros.h>
+#endif
+#else
 #include <ros/ros.h>
 #endif
 
