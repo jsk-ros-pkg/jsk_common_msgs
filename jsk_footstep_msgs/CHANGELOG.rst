@@ -2,8 +2,8 @@
 Changelog for package jsk_footstep_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+5.0.1 (2026-07-28)
+------------------
 * Make actionlib_msgs a ROS1-only dependency; ROS2 actions don't need it
 * Contributors: Kei Okada
 
