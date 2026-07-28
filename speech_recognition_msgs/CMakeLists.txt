@@ -58,27 +58,12 @@ elseif("$ENV{ROS_VERSION}" EQUAL 2)
 
   find_package(ament_cmake REQUIRED)
   find_package(rosidl_default_generators REQUIRED)
+  find_package(ros_environment REQUIRED)
   foreach(_dep ${_deps})
     find_package(${_dep} REQUIRED)
   endforeach()
 
-  set(msg_files)
-  foreach(_f ${_msgs})
-    list(APPEND msg_files "msg/${_f}")
-  endforeach()
-
-  set(srv_files)
-  foreach(_f ${_srvs})
-    list(APPEND srv_files "srv/${_f}")
-  endforeach()
-
-  rosidl_generate_interfaces(${PROJECT_NAME}
-    ${msg_files}
-    ${srv_files}
-    DEPENDENCIES
-      ${_deps}
-    ADD_LINTER_TESTS
-  )
+  rosidl_auto_generate_interfaces(ADD_LINTER_TESTS)
 
   if(BUILD_TESTING)
     find_package(ament_lint_auto REQUIRED)
