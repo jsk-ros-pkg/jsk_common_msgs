@@ -2,8 +2,8 @@
 Changelog for package posedetection_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+5.0.0 (2026-07-28)
+------------------
 * Add ROS2 (ament_cmake) support alongside ROS1 (catkin) for feature0d_view
   and feature0d_to_image and for message/service generation, building from
   the same source tree (`#35 <https://github.com/jsk-ros-pkg/jsk_common_msgs/issues/35>`_). Three msg files now use the

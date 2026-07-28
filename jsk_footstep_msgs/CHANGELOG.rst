@@ -2,8 +2,8 @@
 Changelog for package jsk_footstep_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+5.0.0 (2026-07-28)
+------------------
 * Add ROS2 (ament_cmake) support alongside ROS1 (catkin), building from the
   same source tree (`#35 <https://github.com/jsk-ros-pkg/jsk_common_msgs/issues/35>`_). The 'duration' field type differs between ROS1
   (duration) and ROS2 (builtin_interfaces/Duration), so PlanFootsteps.action

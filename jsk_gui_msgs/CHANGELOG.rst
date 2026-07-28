@@ -2,8 +2,8 @@
 Changelog for package jsk_gui_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+5.0.0 (2026-07-28)
+------------------
 * Add ROS2 (ament_cmake) support alongside ROS1 (catkin), building from the
   same source tree (`#35 <https://github.com/jsk-ros-pkg/jsk_common_msgs/issues/35>`_). Tablet.msg now uses the fully-qualified
   std_msgs/Header, required by ROS2 rosidl
