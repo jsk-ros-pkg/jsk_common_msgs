@@ -14,8 +14,10 @@ project(speech_recognition_msgs)
 set(_msgs
   Grammar.msg
   PhraseRule.msg
+  SentenceInfo.msg
   SpeechRecognitionCandidates.msg
   Vocabulary.msg
+  WordInfo.msg
 )
 set(_srvs
   SpeechRecognition.srv
