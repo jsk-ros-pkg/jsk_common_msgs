@@ -42,8 +42,15 @@ namespace posedetection_msgs
       using std::placeholders::_1;
       using std::placeholders::_2;
       _pub = _node->create_publisher<sensor_msgs::msg::Image>("~/output", 1);
+#if !RCLCPP_VERSION_GTE(29, 0, 0)
+      // Jazzy and earlier: need to convert QoS to rmw_qos_profile
       _sub_image.subscribe(_node.get(), "image", rclcpp::QoS(1).get_rmw_qos_profile());
       _sub_feature.subscribe(_node.get(), "Feature0D", rclcpp::QoS(1).get_rmw_qos_profile());
+#else
+      // Kilted and later: QoS object directly
+      _sub_image.subscribe(_node.get(), "image", rclcpp::QoS(1));
+      _sub_feature.subscribe(_node.get(), "Feature0D", rclcpp::QoS(1));
+#endif
       _sync = std::make_shared<message_filters::Synchronizer<SyncPolicy>>(100);
       _sync->connectInput(_sub_image, _sub_feature);
       _sync->registerCallback(std::bind(

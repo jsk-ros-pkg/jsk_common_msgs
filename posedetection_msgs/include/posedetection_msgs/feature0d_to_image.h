@@ -58,6 +58,7 @@
 #include <posedetection_msgs/ImageFeature0D.h>
 #else
 #include <rclcpp/rclcpp.hpp>
+#include <rclcpp/version.h>
 #include <sensor_msgs/msg/image.hpp>
 #include <posedetection_msgs/msg/image_feature0_d.hpp>
 
