@@ -70,10 +70,17 @@
 #include <boost/shared_ptr.hpp>
 #endif
 
+#if ROS_VERSION_MAJOR == 1
 #include <message_filters/subscriber.h>
 #include <message_filters/time_synchronizer.h>
 #include <message_filters/synchronizer.h>
 #include <message_filters/sync_policies/exact_time.h>
+#else
+#include <message_filters/subscriber.hpp>
+#include <message_filters/time_synchronizer.hpp>
+#include <message_filters/synchronizer.hpp>
+#include <message_filters/sync_policies/exact_time.hpp>
+#endif
 
 #if ROS_VERSION_MAJOR == 1
 #if BOOST_VERSION < 106000  // since 1.60.0, boost uses placeholders namesapce for _1,_2...
