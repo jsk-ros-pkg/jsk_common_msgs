@@ -14,26 +14,10 @@
 #include "posedetection_msgs/feature0d_to_image.h"
 
 #if ROS_VERSION_MAJOR == 1
-#include <ros/ros.h>
-#include <sensor_msgs/Image.h>
-#include <posedetection_msgs/ImageFeature0D.h>
-#else
-#include <rclcpp/rclcpp.hpp>
-#include <sensor_msgs/msg/image.hpp>
-#include <posedetection_msgs/msg/image_feature0_d.hpp>
-#endif
-
-#include <opencv2/highgui/highgui.hpp>
-#if ROS_VERSION_MAJOR == 1
-#include <boost/shared_ptr.hpp>
-#endif
-
-#if ROS_VERSION_MAJOR == 1
 #include <cv_bridge/cv_bridge.h>
 #else
 #include <cv_bridge/cv_bridge.hpp>
 #endif
-#include <message_filters/synchronizer.h>
 
 namespace posedetection_msgs
 {
