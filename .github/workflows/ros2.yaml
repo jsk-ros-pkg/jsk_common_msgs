@@ -10,7 +10,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        ROS_DISTRO: [jazzy, kilted, lyrical]
+        ROS_DISTRO: [jazzy, kilted, lyrical, rolling]
     steps:
       - uses: actions/checkout@v4
       - uses: ros-industrial/industrial_ci@master
