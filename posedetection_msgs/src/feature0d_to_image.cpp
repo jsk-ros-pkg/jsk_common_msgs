@@ -14,26 +14,10 @@
 #include "posedetection_msgs/feature0d_to_image.h"
 
 #if ROS_VERSION_MAJOR == 1
-#include <ros/ros.h>
-#include <sensor_msgs/Image.h>
-#include <posedetection_msgs/ImageFeature0D.h>
-#else
-#include <rclcpp/rclcpp.hpp>
-#include <sensor_msgs/msg/image.hpp>
-#include <posedetection_msgs/msg/image_feature0_d.hpp>
-#endif
-
-#include <opencv2/highgui/highgui.hpp>
-#if ROS_VERSION_MAJOR == 1
-#include <boost/shared_ptr.hpp>
-#endif
-
-#if ROS_VERSION_MAJOR == 1
 #include <cv_bridge/cv_bridge.h>
 #else
 #include <cv_bridge/cv_bridge.hpp>
 #endif
-#include <message_filters/synchronizer.h>
 
 namespace posedetection_msgs
 {
@@ -58,8 +42,15 @@ namespace posedetection_msgs
       using std::placeholders::_1;
       using std::placeholders::_2;
       _pub = _node->create_publisher<sensor_msgs::msg::Image>("~/output", 1);
+#if !RCLCPP_VERSION_GTE(29, 0, 0)
+      // Jazzy and earlier: need to convert QoS to rmw_qos_profile
       _sub_image.subscribe(_node.get(), "image", rclcpp::QoS(1).get_rmw_qos_profile());
       _sub_feature.subscribe(_node.get(), "Feature0D", rclcpp::QoS(1).get_rmw_qos_profile());
+#else
+      // Kilted and later: QoS object directly
+      _sub_image.subscribe(_node.get(), "image", rclcpp::QoS(1));
+      _sub_feature.subscribe(_node.get(), "Feature0D", rclcpp::QoS(1));
+#endif
       _sync = std::make_shared<message_filters::Synchronizer<SyncPolicy>>(100);
       _sync->connectInput(_sub_image, _sub_feature);
       _sync->registerCallback(std::bind(
