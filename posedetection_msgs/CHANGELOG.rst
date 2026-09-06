@@ -2,8 +2,8 @@
 Changelog for package posedetection_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+5.0.2 (2026-09-06)
+------------------
 * Fix message_filters::Subscriber API compatibility between Jazzy and Kilted+,
   and update message_filters includes to .hpp for ROS2 (`#36 <https://github.com/jsk-ros-pkg/jsk_common_msgs/issues/36>`_)
 * Contributors: Kei Okada
